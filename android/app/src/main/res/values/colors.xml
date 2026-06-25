@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 键盘主背景色，对应 Flutter ColorScheme.surfaceContainerHighest -->
+    <color name="keyboard_background">#FFE1E3E5</color>
+
+    <!-- 表面容器色，用于输入框、操作按钮、风格标签背景 -->
+    <color name="keyboard_surface">#FFF7F9FA</color>
+
+    <!-- 主色，用于发送按钮等强调操作 -->
+    <color name="keyboard_primary">#FF386A20</color>
+    <color name="keyboard_on_primary">#FFFFFFFF</color>
+
+    <!-- 文本颜色 -->
+    <color name="keyboard_on_surface">#FF1A1C1E</color>
+    <color name="keyboard_on_surface_variant">#FF43474E</color>
+
+    <!-- 禁用状态遮罩 -->
+    <color name="keyboard_disabled_overlay">#99000000</color>
+</resources>

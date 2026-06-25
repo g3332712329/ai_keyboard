@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_keyboard"
+    android:padding="8dp">
+
+
+    <!-- 顶部输入框：只读展示粘贴内容 -->
+    <TextView
+        android:id="@+id/tv_input"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_input"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:hint="@string/keyboard_input_hint"
+        android:maxLines="1"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/keyboard_on_surface"
+        android:textColorHint="@color/keyboard_on_surface_variant"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/btn_switch_keyboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="对方：今晚吃什么？" />
+
+    <!-- 主动切换输入法按钮，放在输入框右侧 -->
+    <FrameLayout
+        android:id="@+id/btn_switch_keyboard"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_button_surface"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gl_actions"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/keyboard_switch_ime"
+            android:src="@drawable/icon_language" />
+    </FrameLayout>
+
+
+    <!-- 右侧操作栏的左边界 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="64dp" />
+
+    <!-- 右侧操作列：删除、清空、发送 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_actions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_actions"
+        app:layout_constraintTop_toTopOf="@+id/btn_paste">
+
+        <!-- 删除按钮 -->
+        <FrameLayout
+            android:id="@+id/btn_delete"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_button_surface"
+            android:contentDescription="@string/keyboard_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/keyboard_delete"
+                android:src="@drawable/icon_remove" />
+
+        </FrameLayout>
+
+        <!-- 清空按钮 -->
+        <FrameLayout
+            android:id="@+id/btn_clear"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_button_surface"
+            android:contentDescription="@string/keyboard_clear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_delete">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/keyboard_clear"
+                android:src="@drawable/icon_clear" />
+        </FrameLayout>
+
+        <!-- 发送按钮：占满剩余高度 -->
+        <TextView
+            android:id="@+id/btn_send"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_button_primary"
+            android:gravity="center"
+            android:text="@string/keyboard_send"
+            android:textColor="@color/keyboard_on_primary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_clear" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 粘贴内容按钮 -->
+    <TextView
+        android:id="@+id/btn_paste"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_button_surface"
+        android:gravity="center"
+        android:text="@string/keyboard_paste"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/gl_actions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_input" />
+
+    <!-- 风格网格容器：ViewPager2 + Flow 实现分页 3x3 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_style_container"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_actions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_paste" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/vp_style_container"
+        app:layout_constraintEnd_toEndOf="@id/vp_style_container"
+        app:layout_constraintStart_toStartOf="@id/vp_style_container"
+        app:layout_constraintTop_toTopOf="@id/vp_style_container" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

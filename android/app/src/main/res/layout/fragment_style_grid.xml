@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_height="180dp"
+    tools:layout_width="300dp">
+
+
+    <TextView
+        android:id="@+id/style_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="职场专业" />
+
+    <TextView
+        android:id="@+id/style_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="高情商社交" />
+
+    <TextView
+        android:id="@+id/style_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="幽默化解" />
+
+    <TextView
+        android:id="@+id/style_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="知心好友" />
+
+    <TextView
+        android:id="@+id/style_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="温柔治愈" />
+
+    <TextView
+        android:id="@+id/style_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="暧昧推拉" />
+
+    <TextView
+        android:id="@+id/style_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="霸道气场" />
+
+    <TextView
+        android:id="@+id/style_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="浪漫诗意" />
+
+    <TextView
+        android:id="@+id/style_8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_style_chip"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/keyboard_on_surface"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        tools:text="毒舌犀利" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/style_flow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="style_0,style_1,style_2,style_3,style_4,style_5,style_6,style_7,style_8"
+        app:flow_horizontalGap="8dp"
+        app:flow_horizontalStyle="spread"
+        app:flow_maxElementsWrap="3"
+        app:flow_verticalGap="8dp"
+        app:flow_verticalStyle="spread"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ProgressBar
+        android:id="@+id/pb_loading_view"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

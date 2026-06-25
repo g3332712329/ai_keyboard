@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    输入法服务元数据配置。
+
+    android:settingsActivity：用户点击系统设置里的「设置」按钮时打开的 Activity。
+    android:isDefault：是否作为默认输入法，一般设为 false，由用户手动选择。
+-->
+<input-method
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:settingsActivity="com.dboy.ai_keyboard.MainActivity"
+    android:isDefault="false">
+
+    <!--
+        subtype：输入法子类型。
+        AI 回复键盘通常只需要一个 subtype，
+        如果有多种语言或模式可以添加多个。
+    -->
+    <subtype
+        android:imeSubtypeMode="keyboard"
+        android:imeSubtypeLocale="zh_CN"
+        android:label="@string/app_name" />
+</input-method>

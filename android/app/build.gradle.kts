@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+//    id("org.jetbrains.kotlin.plugin.serialization")
+    kotlin("plugin.serialization") version "2.4.0"
 }
 
 android {
@@ -32,6 +34,10 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 kotlin {
@@ -42,4 +48,17 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation("com.tencent:mmkv:[2.4.0, 2.5)")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
+    implementation("com.aallam.openai:openai-client:4.1.0")
+    implementation("io.ktor:ktor-client-android:3.1.3")
 }

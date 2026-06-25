@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AI回复助手</string>
+
+    <!-- 键盘面板文案 -->
+    <string name="keyboard_input_hint">粘贴对话内容以生成回复...</string>
+    <string name="keyboard_paste">粘贴内容</string>
+    <string name="keyboard_delete">删除</string>
+    <string name="keyboard_clear">清空</string>
+    <string name="keyboard_send">发送</string>
+    <string name="keyboard_switch_ime">切换输入法</string>
+
+    <!-- 风格网格示例文案，实际运行时会从配置动态加载 -->
+    <string name="keyboard_style_sample_1">正式</string>
+    <string name="keyboard_style_sample_2">幽默</string>
+    <string name="keyboard_style_sample_3">简短</string>
+    <string name="keyboard_style_sample_4">详细</string>
+    <string name="keyboard_style_sample_5">温柔</string>
+    <string name="keyboard_style_sample_6">直接</string>
+    <string name="keyboard_style_sample_7">敷衍</string>
+    <string name="keyboard_style_sample_8">鼓励</string>
+    <string name="keyboard_style_sample_9">拒绝</string>
+</resources>

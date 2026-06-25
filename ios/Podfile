@@ -1,8 +1,26 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '13.0'
+# 全局最低 iOS 版本。Runner 与 keyboard 扩展使用同一版本，避免 CocoaPods 自动分配不一致。
+# 保持与 Flutter Runner 的默认部署版本一致。
+platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+# 自动修正 Xcode 26.5 可能写回的 objectVersion = 70。
+# 当前 CocoaPods 1.16.2 / xcodeproj 1.27.0 不认识 objectVersion 70，会导致
+# `pod install` 在生成 Pods 工程时直接崩溃。这里在 CocoaPods 读取项目之前就把
+# objectVersion 修正为 54，确保团队任何成员、任何机器上执行 `pod install` 都能成功，
+# 无需手动改文件。
+#
+# 注意：当 CocoaPods / xcodeproj 更新到支持 objectVersion 70 后，可移除本段。
+runner_project_pbxproj = File.expand_path('Runner.xcodeproj/project.pbxproj', __dir__)
+if File.exist?(runner_project_pbxproj)
+  content = File.read(runner_project_pbxproj)
+  if content.include?('objectVersion = 70;')
+    updated = content.gsub('objectVersion = 70;', 'objectVersion = 54;')
+    File.write(runner_project_pbxproj, updated)
+    puts "[Podfile] 已自动将 objectVersion 从 70 修正为 54，以兼容当前 CocoaPods。"
+  end
+end
 
 project 'Runner', {
   'Debug' => :debug,
@@ -36,8 +54,59 @@ target 'Runner' do
   end
 end
 
+# iOS 键盘扩展 Target：需要独立链接 MMKV，以便与容器 App 共享 App Group 数据。
+# MMKV iOS 端使用 Objective-C/C++ 实现，通过 CocoaPods 的 use_frameworks!
+# 会自动生成 Swift Module / Umbrella Header，扩展中的 Swift 代码可直接 import MMKV。
+target 'keyboard' do
+  use_frameworks!
+  pod 'MMKV', '>= 2.4.0', '< 2.5'
+end
+
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # 为 MMKV 定义 MMKV_IOS_EXTENSION 宏，使键盘扩展编译时跳过对
+    # UIApplication.sharedApplication 的调用，避免 App Extension 编译错误。
+    # 该宏仅影响 MMKV 内部的条件编译，不影响 Runner 中 MMKV 的正常使用。
+    if target.name == 'MMKV'
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'MMKV_IOS_EXTENSION=1'
+      end
+    end
   end
+
+  # 统一 Pods Target 的最低 iOS 版本，保持与 Podfile 中的 platform 一致，
+  # 避免 CocoaPods 生成配置时弹出版本不一致的警告。
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
+
+  # 修改用户项目（Runner.xcodeproj）中各 Target 的 build settings。
+  # Runner 保持 13.0；keyboard 扩展因为用了 iOS 15 的 SwiftUI API（ProgressView、
+  # buttonStyle(.borderedProminent) 等），需要提升到 15.0。
+  #
+  # 这里直接打开 user project 修改并保存，比遍历 aggregate_targets 更稳定，
+  # 能确保每次 `pod install` 后 keyboard target 的部署版本都被正确设置。
+  user_project_path = File.expand_path('Runner.xcodeproj', __dir__)
+  user_project = Xcodeproj::Project.open(user_project_path)
+
+  user_project.targets.each do |user_target|
+    user_target.build_configurations.each do |config|
+      config.build_settings.delete('CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER')
+
+      if user_target.name == 'keyboard'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+        puts "[Podfile] 设置 #{user_target.name} #{config.name} 的部署版本为 15.0"
+      else
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      end
+    end
+  end
+
+  user_project.save
+
 end

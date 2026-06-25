@@ -1,0 +1,41 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "device_info_plus-13.1.0",
+          "kind" : "fileSystem",
+          "location" : "/Users/dboy/development/Android/Project/ai_keyboard/ios/Flutter/ephemeral/Packages/.packages/device_info_plus-13.1.0",
+          "name" : "device_info_plus"
+        },
+        "state" : {
+          "name" : "fileSystem",
+          "path" : "/Users/dboy/development/Android/Project/ai_keyboard/ios/Flutter/ephemeral/Packages/.packages/device_info_plus-13.1.0"
+        },
+        "subpath" : "device_info_plus-13.1.0"
+      },
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "flutterframework",
+          "kind" : "fileSystem",
+          "location" : "/Users/dboy/development/Android/Project/ai_keyboard/ios/Flutter/ephemeral/Packages/.packages/FlutterFramework",
+          "name" : "FlutterFramework"
+        },
+        "state" : {
+          "name" : "fileSystem",
+          "path" : "/Users/dboy/development/Android/Project/ai_keyboard/ios/Flutter/ephemeral/Packages/.packages/FlutterFramework"
+        },
+        "subpath" : "flutterframework"
+      }
+    ],
+    "prebuilts" : [
+
+    ]
+  },
+  "version" : 7
+}

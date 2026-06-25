@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="ai_keyboard"
+        android:label="@string/app_name"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -25,6 +25,31 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!--
+            AI 回复键盘输入法服务。
+
+            BIND_INPUT_METHOD 权限是必须的，
+            否则系统无法把输入请求绑定到这个 Service 上。
+
+            exported="true" 表示允许系统绑定输入法服务。
+
+            meta-data 中的 android.view.im 指向 method.xml，
+            系统通过它识别这是一个输入法，并读取 subtype 等配置。
+        -->
+        <service
+            android:name=".AiKeyboardService"
+            android:permission="android.permission.BIND_INPUT_METHOD"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+        </service>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

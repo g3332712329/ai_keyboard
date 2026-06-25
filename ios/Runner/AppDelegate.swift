@@ -12,5 +12,15 @@ import UIKit
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
+
+    // 注册 Pigeon 生成的 iOS 端通道实现。
+    // 该通道用于向 Flutter 侧暴露 App Group 容器目录路径，
+    // 使 MMKV 能够在容器 App 与键盘扩展之间共享数据。
+    if let binaryMessenger = engineBridge.pluginRegistry.registrar(forPlugin: "GeneratedPluginRegistrant")?.messenger() {
+      IosGroupAppEventChannelSetup.setUp(
+        binaryMessenger: binaryMessenger,
+        api: OnlyIosEventChannelImp()
+      )
+    }
   }
 }
