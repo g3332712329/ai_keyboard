@@ -9,7 +9,7 @@ jobs:
       - name: Build Xcode project
         run: |
           cd ios
-          xcodebuild clean build -project Runner.xcodeproj -scheme Runner -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          xcodebuild clean build -workspace Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
       - name: Upload App
         uses: actions/upload-artifact@v4
         with:
